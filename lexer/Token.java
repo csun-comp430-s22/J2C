@@ -1,3 +1,3 @@
-package tokenizer;
+package lexer;
 public interface Token {
 }
