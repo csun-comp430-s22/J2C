@@ -1,14 +1,14 @@
 package lexer;
 
-public class ClassToken {
+public class AdditionToken implements Token {
     public boolean equals(final Object other) {
-        return other instanceof ClassToken;
+        return other instanceof AdditionToken;
     }
     public int hashCode() {
-        return 10;
+        return 8;
     }
     public String toString() {
-        return "class";
+        return "+";
     }
     
 }

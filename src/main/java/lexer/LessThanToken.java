@@ -1,14 +1,16 @@
 package lexer;
 
-public class SemiColonToken {
+public class LessThanToken implements Token {
+
     public boolean equals(final Object other) {
-        return other instanceof SemiColonToken;
+        return other instanceof LessThanToken;
     }
     public int hashCode() {
-        return 7;
+        return 13;
     }
+    
     public String toString() {
-        return ";";
+        return "<";
     }
     
 }

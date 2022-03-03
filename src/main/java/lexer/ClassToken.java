@@ -1,15 +1,14 @@
 package lexer;
 
-public class SubtractionToken {
-
+public class ClassToken implements Token {
     public boolean equals(final Object other) {
-        return other instanceof SubtractionToken;
+        return other instanceof ClassToken;
     }
     public int hashCode() {
-        return 9;
+        return 10;
     }
     public String toString() {
-        return "-";
+        return "class";
     }
     
 }

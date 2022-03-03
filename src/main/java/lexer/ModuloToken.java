@@ -1,14 +1,15 @@
 package lexer;
 
-public class AdditionToken {
+public class ModuloToken implements Token {
     public boolean equals(final Object other) {
-        return other instanceof AdditionToken;
+        return other instanceof ModuloToken;
     }
     public int hashCode() {
-        return 8;
+        return 14;
     }
     public String toString() {
-        return "+";
+        return "%";
     }
+    
     
 }
