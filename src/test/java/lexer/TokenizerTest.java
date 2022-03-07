@@ -162,6 +162,18 @@ public class TokenizerTest {
         assertTokenizes(";",
                         new Token[] { new SemiColonToken() });
     }
+
+    @Test
+    public void testSingleDigitInteger() {
+        assertTokenizes("1",
+                        new Token[] { new IntegerToken(1) });
+    }
+
+    @Test
+    public void testMultiDigitInteger() {
+        assertTokenizes("123",
+                        new Token[] { new IntegerToken(123) });
+    }
     
 
 
