@@ -43,7 +43,11 @@ public class Tokenizer {
                 return new IfToken();
             } else if (name.equals("else")) {
                 return new ElseToken();
-            } else {
+            } else if (name.equals("class")) {
+                return new ClassToken();
+            } else if (name.equals("while")) {
+                return new WhileToken();
+            }  else {
                 return new VariableToken(name);
             }
         } else {
@@ -69,6 +73,30 @@ public class Tokenizer {
                 } else if (input.startsWith("}", offset)) {
                     offset += 1;
                     retval = new RightCurlyToken();
+                } else if (input.startsWith("+", offset)) {
+                    offset += 1;
+                    retval = new AdditionToken();
+                } else if (input.startsWith("!", offset)) {
+                    offset += 1;
+                    retval = new NotToken();
+                } else if (input.startsWith("%", offset)) {
+                    offset += 1;
+                    retval = new ModuloToken();
+                } else if (input.startsWith(">", offset)) {
+                    offset += 1;
+                    retval = new GreaterThanToken();
+                } else if(input.startsWith("<", offset)) {
+                    offset += 1;
+                    retval = new LessThanToken();
+                } else if(input.startsWith("*", offset)) {
+                    offset += 1;
+                    retval = new MultiplicationToken();
+                } else if(input.startsWith("-", offset)) {
+                    offset += 1;
+                    retval = new SubtractionToken();
+                } else if(input.startsWith(";", offset)) {
+                    offset += 1;
+                    retval = new SemiColonToken();
                 } else {
                     throw new TokenizerException();
                 }
