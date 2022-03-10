@@ -11,84 +11,84 @@ import org.junit.Test;
 
 public class TokenizerTest {
     public void assertTokenizes(final String input,
-                                final Token[] expected) {
-        try {
-            final Tokenizer tokenizer = new Tokenizer(input);
+                                final Token[] expected) throws TokenizerException {
+       
+        final Tokenizer tokenizer = new Tokenizer(input);
             final List<Token> received = tokenizer.tokenize();
             assertArrayEquals(expected,
                               received.toArray(new Token[received.size()]));
-        } catch (final TokenizerException e) {
-            fail("Tokenizer threw exception");
-        }
+     
+            
+       
     }
     
     @Test
-    public void testEmptyString() {
+    public void testEmptyString() throws TokenizerException {
         assertTokenizes("", new Token[0]);
     }
 
     @Test
-    public void testOnlyWhitespace() {
+    public void testOnlyWhitespace() throws TokenizerException {
         assertTokenizes("    ", new Token[0]);
     }
 
     @Test
-    public void testTrueByItself() {
+    public void testTrueByItself() throws TokenizerException {
         assertTokenizes("true",
                         new Token[] { new TrueToken() });
     }
 
     @Test
-    public void testVariable() {
+    public void testVariable() throws TokenizerException {
         assertTokenizes("foo",
                         new Token[] { new VariableToken("foo") });
     }
 
 
     @Test
-    public void testTrueTrueIsVariable() {
+    public void testTrueTrueIsVariable() throws TokenizerException {
         assertTokenizes("truetrue",
                         new Token[] { new VariableToken("truetrue")});
     }
 
     @Test
-    public void testTrueSpaceTrueAreTokens() {
+    public void testTrueSpaceTrueAreTokens() throws TokenizerException {
         assertTokenizes("true true",
                         new Token[] { new TrueToken(),
                                       new TrueToken() });
     }
 
     @Test
-    public void testLeftParen() {
+    public void testLeftParen() throws TokenizerException {
         assertTokenizes("(",
                         new Token[] { new LeftParenToken() });
     }
 
     @Test
-    public void IfToken() {
+    public void IfToken() throws TokenizerException {
         assertTokenizes("if",
                         new Token[] { new IfToken() });
     }
     @Test
-    public void ElseToken() {
+    public void ElseToken() throws TokenizerException {
         assertTokenizes("else",
                         new Token[] { new ElseToken() });
     }
 
     @Test
-    public void testLeftCurly() {
+    public void testLeftCurly() throws TokenizerException {
         assertTokenizes("{",
                         new Token[] { new LeftCurlyToken() });
     }
 
     @Test
-    public void testRightCurly() {
+    public void testRightCurly() throws TokenizerException {
         assertTokenizes("}",
                         new Token[] { new RightCurlyToken() });
     }
 
     @Test
-    public void testRightParen() {
+    public void testRightParen() throws TokenizerException {
         assertTokenizes(")",
                         new Token[] { new RightParenToken() });
     }
@@ -103,81 +103,120 @@ public class TokenizerTest {
     //                     new Token[] { new GreaterThanToken() });
     // }
     @Test
-    public void testFalseByItself() {
+    public void testFalseByItself() throws TokenizerException {
         assertTokenizes("false",
                         new Token[] { new FalseToken() });
     }
 
     @Test
-    public void testAddition() {
+    public void testAddition() throws TokenizerException {
         assertTokenizes("+",
                         new Token[] { new AdditionToken() });
     }
     @Test
-    public void testModulo() {
+    public void testModulo() throws TokenizerException {
         assertTokenizes("%",
                         new Token[] { new ModuloToken() });
     }
 
     @Test
-    public void testNot() {
+    public void testNot() throws TokenizerException {
         assertTokenizes("!",
                         new Token[] { new NotToken() });
     }
 
     @Test
-    public void testGreaterThan() {
+    public void testGreaterThan() throws TokenizerException {
         assertTokenizes(">",
                         new Token[] { new GreaterThanToken() });
     }
     @Test
-    public void testLessThan() {
+    public void testLessThan() throws TokenizerException {
         assertTokenizes("<",
                         new Token[] { new LessThanToken() });
     }
 
     @Test
-    public void testClassToken() {
+    public void testClassToken() throws TokenizerException {
         assertTokenizes("class",
                         new Token[] { new ClassToken() });
     }
     @Test
-    public void testWhileToken() {
+    public void testWhileToken() throws TokenizerException {
         assertTokenizes("while",
                         new Token[] { new WhileToken() });
     }
 
     @Test
-    public void testMultiplication() {
+    public void testMultiplication() throws TokenizerException {
         assertTokenizes("*",
                         new Token[] { new MultiplicationToken() });
     }
     @Test
-    public void testSubtraction() {
+    public void testSubtraction() throws TokenizerException {
         assertTokenizes("-",
                         new Token[] { new SubtractionToken() });
     }
     @Test
-    public void testSemiColon() {
+    public void testSemiColon() throws TokenizerException {
         assertTokenizes(";",
                         new Token[] { new SemiColonToken() });
     }
 
     @Test
-    public void testSingleDigitInteger() {
+    public void testSingleDigitInteger() throws TokenizerException {
         assertTokenizes("1",
                         new Token[] { new IntegerToken(1) });
     }
 
     @Test
-    public void testMultiDigitInteger() {
+    public void testMultiDigitInteger() throws TokenizerException {
         assertTokenizes("123",
                         new Token[] { new IntegerToken(123) });
     }
-    
+    @Test(expected = TokenizerException.class)
+    public void testInvalidInput() throws TokenizerException {
+        assertTokenizes("$",
+                        null);
+    }
 
+    @Test
+    public void testAssignmentToken() throws TokenizerException {
+        assertTokenizes("=",
+                        new Token[] { new AssignmentToken() });
+    }
 
+    @Test
+    public void testThisToken() throws TokenizerException {
+        assertTokenizes("this",
+                        new Token[] { new ThisToken() });
+    }
 
+    @Test
+    public void testExtendsToken() throws TokenizerException {
+        assertTokenizes("extends",
+                        new Token[] { new ExtendsToken() });
+    }
+    @Test
+    public void testNewToken() throws TokenizerException {
+        assertTokenizes("new",
+                        new Token[] { new NewToken() });
+    }
+    @Test
+    public void testReturnToken() throws TokenizerException {
+        assertTokenizes("return",
+                        new Token[] { new ReturnToken() });
+    }
+    @Test
+    public void testBreakToken() throws TokenizerException {
+        assertTokenizes("break",
+                        new Token[] { new BreakToken() });
+    }
+    @Test
+    public void testDivision() throws TokenizerException {
+        assertTokenizes("/",
+                        new Token[] { new DivisionToken() });
+    }
 
 
 

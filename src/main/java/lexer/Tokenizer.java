@@ -65,6 +65,16 @@ public class Tokenizer {
                 return new ClassToken();
             } else if (name.equals("while")) {
                 return new WhileToken();
+            } else if (name.equals("this")) {
+                return new ThisToken();
+            } else if (name.equals("extends")) {
+                return new ExtendsToken();
+            } else if (name.equals("new")) {
+                return new NewToken();
+            } else if (name.equals("return")) {
+                return new ReturnToken();
+            } else if (name.equals("break")) {
+                return new BreakToken();
             } else {
                 return new VariableToken(name);
             }
@@ -113,8 +123,13 @@ public class Tokenizer {
         } else if (input.startsWith(";", offset)) {
             offset += 1;
             retval = new SemiColonToken();
-        }
-
+        } else if (input.startsWith("/", offset)) {
+            offset += 1;
+            retval = new DivisionToken();
+        } else if (input.startsWith("=", offset)) {
+            offset += 1;
+            retval = new AssignmentToken();
+        } 
         return retval;
     }
 
