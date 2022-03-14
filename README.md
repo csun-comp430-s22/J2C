@@ -38,14 +38,21 @@ Planned Restrictions: We don’t know quite yet.
 
 Target Language: C
 
+<<<<<<< HEAD
 Language Description: J2C (Java to C). The goal for us is to pass this class and try to learn how to make a compiler and since we are all familiar with Java it makes sense to do it in Java. We are choosing C as our target language because some of our members have some experience with C and it's not too low level for us to understand and explain to other members of the group.
 
 Abstract Syntax:
+=======
+<h3>Abstract Syntax Tree</h3>
+
+```
+>>>>>>> 9e9de7524b81ce6952d46fae87e4eb98c3c25023
 var is a variable
 classname is the name of a class
 methodname is the name of a method
 str is a string
 i is an integer
+<<<<<<< HEAD
 
 type:: = Int | Boolean | Void | Built-in types
 classname; includes Object and String
@@ -1138,3 +1145,12 @@ final Token[] expected) throws TokenizerException {
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 ![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+=======
+```
+
+```
+type:: = int | boolean | void |   // Built-in types
+op:: = + | - | * | / | < | > | ==   // Arithmetic operations
+```
+
+>>>>>>> 9e9de7524b81ce6952d46fae87e4eb98c3c25023

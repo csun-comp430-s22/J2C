@@ -1,13 +1,17 @@
 package lexer;
 
-public class BooleanToken implements Token {
+public class IntTypeToken implements Token {
+
     public boolean equals(final Object other) {
-        return other instanceof BooleanToken;
+        return other instanceof IntTypeToken;
     }
+
     public int hashCode() {
-        return 72;
+        return 74;
     }
+
     public String toString() {
-        return "Bool";
+        return "int";
     }
+
 }
