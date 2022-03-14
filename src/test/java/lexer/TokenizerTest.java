@@ -1,9 +1,11 @@
 package lexer;
 
+import java.lang.ProcessBuilder.Redirect.Type;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.fail;
 
@@ -257,4 +259,18 @@ public class TokenizerTest {
                 new Token[] { new IntTypeToken() });
     }
 
+    @Test
+    public void testIntegerFalse() throws TokenizerException {
+        assertFalse(new IntegerToken(0).equals(Boolean.TYPE));
+    }
+
+    @Test
+    public void testIntegerHash() throws TokenizerException {
+        assertEquals(new IntegerToken(1).value, new IntegerToken(1).hashCode());
+    }
+
+
+    
+
 }
+
