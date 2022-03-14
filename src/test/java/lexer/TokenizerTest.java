@@ -217,6 +217,19 @@ public class TokenizerTest {
         assertTokenizes("/",
                         new Token[] { new DivisionToken() });
     }
+     @Test
+    public void testBooleanToken() throws TokenizerException {
+        assertTokenizes("Bool",
+                        new Token[] { new BooleanToken() });
+    }
+     public void testPrintlnToken() throws TokenizerException {
+        assertTokenizes("Println",
+                        new Token[] { new PrintlnToken() });
+    }
+     public void testVoidToken() throws TokenizerException {
+        assertTokenizes("Void",
+                        new Token[] { new VoidToken() });
+    }
 
 
 
