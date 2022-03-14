@@ -269,6 +269,21 @@ public class TokenizerTest {
         assertEquals(new IntegerToken(1).value, new IntegerToken(1).hashCode());
     }
 
+    @Test
+    public void testEquals() throws TokenizerException {
+        assertTokenizes("==", new Token[] { new EqualsToken() });
+    }
+
+    @Test
+    public void testGreaterThanEquals() throws TokenizerException {
+        assertTokenizes(">=", new Token[] { new GreaterThanEqualToToken() });
+    }
+
+    @Test
+    public void testLessThanEquals() throws TokenizerException {
+        assertTokenizes("<=", new Token[] { new LessThanEqualToToken() });
+    }
+
 
     
 
