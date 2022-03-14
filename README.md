@@ -1135,7 +1135,7 @@ public class TokenizerTest {
 
     
 }
-## Screenshots
+## Our logo
 
 ![Logo](images/J2Clogo.png)
 
