@@ -75,6 +75,16 @@ public class Tokenizer {
                 return new ReturnToken();
             } else if (name.equals("break")) {
                 return new BreakToken();
+            } else if (name.equals("void")) {
+                return new VoidTypeToken();
+            } else if (name.equals("bool")) {
+                return new BooleanTypeToken();
+            } else if (name.equals("println")) {
+                return new PrintlnToken();
+            } else if (name.equals("string")) {
+                return new StringTypeToken();
+            } else if (name.equals("int")) {
+                return new IntTypeToken();
             } else {
                 return new VariableToken(name);
             }
@@ -129,7 +139,7 @@ public class Tokenizer {
         } else if (input.startsWith("=", offset)) {
             offset += 1;
             retval = new AssignmentToken();
-        } 
+        }
         return retval;
     }
 
