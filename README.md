@@ -1,23 +1,25 @@
 
 # Project Title
-Design a programming language
 
+Design a programming language
 
 The goal for us is to pass this class and try to learn how to make a compiler and since we are all familiar with Java it makes sense to do it in Java. We are choosing C as our target language because some of our members have some experience with C and it's not too low level for us to understand and explain to other members of the group.
 
+## Appendix
 
-## Appendix 
 Design this programming language with:
-    • Concrete and abstract syntax 
-    • Statically-checked types 
-    • Expressions 
-    • Subroutines 
-    • Mechanisms for computation abstraction 
-• Implement a compiler for the designed language, complete with: 
-    • A parser 
-    • A typechecker / static semantic analyzer 
+    • Concrete and abstract syntax
+    • Statically-checked types
+    • Expressions
+    • Subroutines
+    • Mechanisms for computation abstraction
+• Implement a compiler for the designed language, complete with:
+    • A parser
+    • A typechecker / static semantic analyzer
     • A code generator
+
 ## Authors
+
     Ibtehaz Utsay
     Ziaur Chowdhury
     Noah Reidinger
@@ -27,11 +29,11 @@ Design this programming language with:
 
 ## Documentation
 
-Documentation Link (https://docs.google.com/document/d/1mQWRqwIdn_nY9M3pWh7nB8k_Ht-t0xxur-jjfsBvdB4/edit)
+Documentation Link (<https://docs.google.com/document/d/1mQWRqwIdn_nY9M3pWh7nB8k_Ht-t0xxur-jjfsBvdB4/edit>)
 
-Language Name: J2C 
+Language Name: J2C
 
-Compiler Implementation Language and Reasoning: We are all comfortable working with Java and it’s needless to experiment with a new language at this time. 
+Compiler Implementation Language and Reasoning: We are all comfortable working with Java and it’s needless to experiment with a new language at this time.
 
 Planned Restrictions: We don’t know quite yet.
 
@@ -45,10 +47,10 @@ classname is the name of a class
 methodname is the name of a method
 str is a string
 i is an integer
- 
+
 type:: = Int | Boolean | Void | Built-in types
     classname; includes Object and String
-op:: = + | - | * | / | < | > | == Arithmetic operations
+op:: = + | - | *| / | < | > | == Arithmetic operations
 exp:: = var | str | i | Variables, strings, and integers are expressions
 this | Refers to my instance
 exp op exp | Arithmetic operations
@@ -67,12 +69,12 @@ return; | return Void
 println(exp) | Prints something to the terminal
 exp. methodname(exp*) | Calls a method
 access ::= public | private | protected
-methoddef ::= access type methodname(vardec*) stmt vardecs are comma-separated 
+methoddef ::= access type methodname(vardec*) stmt vardecs are comma-separated
 instancedec ::= access vardec; instance variable declaration classdef ::= class classname extends classname {
-instancedec* 
-constructor(vardec*) stmt vardecs are comma-separated 
+instancedec*
+constructor(vardec*) stmt vardecs are comma-separated
 methoddef*
-} 
+}
 program ::= classdef* exp exp is the entry point?
 
 Computation Abstraction Non-Trivial Feature: Class based inheritance + Methods
@@ -91,11 +93,9 @@ See `contributing.md` for ways to get started.
 
 Please adhere to this project's `code of conduct`.
 
-
 ## Demo
 
 Insert gif or link to demo
-
 
 ## Deployment
 
@@ -106,6 +106,7 @@ To deploy this project run
 ```
 
 ### Adition Token
+
 package lexer;
 
 public class AdditionToken implements Token {
@@ -118,14 +119,15 @@ public class AdditionToken implements Token {
     public String toString() {
         return "+";
     }
-    
+
 }
 
 ### Assignment Token
+
 package lexer;
 
 public class AssignmentToken implements Token {
-    
+
         public boolean equals(final Object other) {
             return other instanceof AssignmentToken;
         }
@@ -136,11 +138,11 @@ public class AssignmentToken implements Token {
         public String toString() {
             return "=";
         }
-        
-    
+
 }
 
 ### Boolean Token
+
 package lexer;
 
 public class BooleanToken implements Token {
@@ -156,10 +158,11 @@ public class BooleanToken implements Token {
 }
 
 ### Break Token
+
 package lexer;
 
 public class BreakToken implements Token {
-    
+
         public boolean equals(final Object other) {
             return other instanceof BreakToken;
         }
@@ -170,10 +173,11 @@ public class BreakToken implements Token {
         public String toString() {
             return "break";
         }
-    
+
 }
 
 ### ClassToken
+
 package lexer;
 
 public class ClassToken implements Token {
@@ -186,15 +190,15 @@ public class ClassToken implements Token {
     public String toString() {
         return "class";
     }
-    
+
 }
 
-
 ### Division Token
+
 package lexer;
 
 public class DivisionToken implements Token {
-    
+
         public boolean equals(final Object other) {
             return other instanceof DivisionToken;
         }
@@ -205,11 +209,11 @@ public class DivisionToken implements Token {
         public String toString() {
             return "/";
         }
-        
-    
+
 }
 
 ### Else Token
+
 package lexer;
 
 public class ElseToken implements Token {
@@ -225,6 +229,7 @@ public class ElseToken implements Token {
 }
 
 ### Equals Token
+
 package lexer;
 
 public class EqualsToken implements Token {
@@ -239,10 +244,11 @@ public class EqualsToken implements Token {
     public String toString() {
         return "==";
     }
-    
+
 }
 
 ### Extends Token
+
 package lexer;
 
 public class ExtendsToken implements Token {
@@ -255,7 +261,7 @@ public class ExtendsToken implements Token {
     public String toString() {
         return "extends";
     }
-    
+
 }
 
 ### False Token
@@ -272,7 +278,7 @@ public class FalseToken implements Token {
     public String toString() {
         return "false";
     }
-    
+
 }
 
 ### GreaterThan Token
@@ -289,7 +295,7 @@ public class GreaterThanToken implements Token {
     public String toString() {
         return ">";
     }
-    
+
 }
 
 ### If Token
@@ -334,10 +340,11 @@ public class IntegerToken implements Token {
     public String toString() {
         return "IntegerToken(" + value + ")";
     }
-    
+
 }
 
 ### LeftCurly Token
+
 package lexer;
 
 public class LeftCurlyToken implements Token {
@@ -352,7 +359,7 @@ public class LeftCurlyToken implements Token {
     public String toString() {
         return "{";
     }
-    
+
 }
 
 ### LeftParen Token
@@ -389,7 +396,7 @@ public class LessThanToken implements Token {
     public String toString() {
         return "<";
     }
-    
+
 }
 
 ### Modulo Token
@@ -406,8 +413,7 @@ public class ModuloToken implements Token {
     public String toString() {
         return "%";
     }
-    
-    
+
 }
 
 ### Multiplication Token
@@ -424,8 +430,7 @@ public class MultiplicationToken implements Token {
     public String toString() {
         return "*";
     }
-    
-    
+
 }
 
 ### New Token
@@ -444,7 +449,7 @@ public class NewToken implements Token {
     public String toString() {
         return "new";
     }
-    
+
 }
 
 ### NotToken
@@ -461,8 +466,7 @@ public class NotToken implements Token {
     public String toString() {
         return "!";
     }
-    
-    
+
 }
 
 ### Println Token
@@ -488,7 +492,7 @@ public class PrintlnToken implements Token {
 package lexer;
 
 public class ReturnToken implements Token {
-    
+
         public boolean equals(final Object other) {
             return other instanceof ReturnToken;
         }
@@ -499,8 +503,7 @@ public class ReturnToken implements Token {
         public String toString() {
             return "return";
         }
-        
-    
+
 }
 
 ### RightCurly Token
@@ -551,7 +554,7 @@ public class SemiColonToken implements Token {
     public String toString() {
         return ";";
     }
-    
+
 }
 
 ### StringType Token
@@ -589,7 +592,7 @@ public class SubtractionToken implements Token {
     public String toString() {
         return "-";
     }
-    
+
 }
 
 ### This Token
@@ -605,7 +608,7 @@ public class ThisToken implements Token {
     }
     public String toString() {
         return "this";
-    } 
+    }
 }
 
 ### Token
@@ -616,6 +619,7 @@ public interface Token {
 }
 
 ### Tokenizer
+
 package lexer;
 
 import java.util.List;
@@ -792,7 +796,7 @@ public class Tokenizer {
 package lexer;
 
 public class TokenizerException extends Exception {
-   
+
 }
 
 ### TrueToken
@@ -877,10 +881,6 @@ public class WhileToken implements Token {
     }
 }
 
-
-
-
-
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
@@ -889,18 +889,15 @@ To run this project, you will need to add the following environment variables to
 
 `ANOTHER_API_KEY`
 
-
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
 
 ## Roadmap
 
 - Additional browser support
 
 - Add more integrations
-
 
 ## Running Tests
 
@@ -924,7 +921,7 @@ import org.junit.Test;
 public class TokenizerTest {
     public void assertTokenizes(final String input,
                                 final Token[] expected) throws TokenizerException {
-       
+
         final Tokenizer tokenizer = new Tokenizer(input);
             final List<Token> received = tokenizer.tokenize();
             assertArrayEquals(expected,
@@ -1130,12 +1127,8 @@ public class TokenizerTest {
                         new Token[] { new DivisionToken() });
     }
 
-
-
-
-    
 }
+
 ## Our logo
 
 ![Logo](images/J2Clogo.png)
-
