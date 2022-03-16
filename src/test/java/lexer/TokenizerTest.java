@@ -187,11 +187,7 @@ public class TokenizerTest {
                 null);
     }
 
-    @Test
-    public void testAssignmentToken() throws TokenizerException {
-        assertTokenizes("=",
-                new Token[] { new AssignmentToken() });
-    }
+   
 
     @Test
     public void testThisToken() throws TokenizerException {
@@ -268,6 +264,36 @@ public class TokenizerTest {
     public void testIntegerHash() throws TokenizerException {
         assertEquals(new IntegerToken(1).value, new IntegerToken(1).hashCode());
     }
+
+    @Test
+    public void testAssignmentToken() throws TokenizerException {
+        assertTokenizes("=",
+                new Token[] { new AssignmentToken() });
+    }
+
+    @Test
+    public void testEqualsToken() throws TokenizerException {
+        assertTokenizes("==",
+                new Token[] { new EqualsToken() });
+    }
+    @Test
+    public void testNotEqualsToken() throws TokenizerException {
+        assertTokenizes("!=",
+                new Token[] { new NotEqualsToken() });
+    }
+    @Test
+    public void testGreaterThanEqualsToken() throws TokenizerException {
+        assertTokenizes(">=",
+                new Token[] { new GreaterThanOrEqualToken() });
+    }
+
+    @Test
+    public void testLessThanEqualsToken() throws TokenizerException {
+        assertTokenizes("<=",
+                new Token[] { new LessThanOrEqualToken() });
+    }
+
+    
 
 
     

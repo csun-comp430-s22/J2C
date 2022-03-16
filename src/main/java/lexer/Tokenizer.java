@@ -112,15 +112,25 @@ public class Tokenizer {
         } else if (input.startsWith("+", offset)) {
             offset += 1;
             retval = new AdditionToken();
-        } else if (input.startsWith("!", offset)) {
+        } else if (input.startsWith("!=", offset)) {
+            offset += 2;
+            retval = new NotEqualsToken();
+        }
+        else if (input.startsWith("!", offset)) {
             offset += 1;
             retval = new NotToken();
         } else if (input.startsWith("%", offset)) {
             offset += 1;
             retval = new ModuloToken();
+        } else if (input.startsWith(">=", offset)) {
+            offset += 2;
+            retval = new GreaterThanOrEqualToken();
         } else if (input.startsWith(">", offset)) {
             offset += 1;
             retval = new GreaterThanToken();
+        } else if (input.startsWith("<=", offset)) {
+            offset += 2;
+            retval = new LessThanOrEqualToken();
         } else if (input.startsWith("<", offset)) {
             offset += 1;
             retval = new LessThanToken();
@@ -136,6 +146,9 @@ public class Tokenizer {
         } else if (input.startsWith("/", offset)) {
             offset += 1;
             retval = new DivisionToken();
+        } else if (input.startsWith("==", offset)) {
+            offset += 2;
+            retval = new EqualsToken();
         } else if (input.startsWith("=", offset)) {
             offset += 1;
             retval = new AssignmentToken();
