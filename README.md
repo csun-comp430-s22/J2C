@@ -8,25 +8,29 @@ Language Name: <b>J2C</b>
 ## Goal
 
 Design a programming language with:
+
 <li>Concrete and abstract syntax</li>
 <li>Statically-checked types</li>
 <li>Expressions</li>
 <li>Subroutines</li>
 <li>Mechanisms for computation abstraction</li>
-    
+<br>
+
 Implement a compiler for the designed language, complete with:
+
 <li>A parser</li>
 <li>A typechecker / static semantic analyzer</li>
 <li>A code generator</li>
 
 ## Authors
-
-    Ibtehaz Utsay
-    Ziaur Chowdhury
-    Noah Reidinger
-    Ryan Nieto
-    Leo Babakhanian
-    Vardges Harutyunyan
+<pre>
+Ibtehaz Utsay
+Ziaur Chowdhury
+Noah Reidinger
+Ryan Nieto
+Leo Babakhanian
+Vardges Harutyunyan
+</pre>
 
 ## Documentation
 
