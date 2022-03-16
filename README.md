@@ -8,15 +8,16 @@ Language Name: <b>J2C</b>
 ## Goal
 
 Design a programming language with:
-    • Concrete and abstract syntax
-    • Statically-checked types
-    • Expressions
-    • Subroutines
-    • Mechanisms for computation abstraction
-• Implement a compiler for the designed language, complete with:
-    • A parser
-    • A typechecker / static semantic analyzer
-    • A code generator
+<li>Concrete and abstract syntax</li>
+<li>Statically-checked types</li>
+<li>Expressions</li>
+<li>Subroutines</li>
+<li>Mechanisms for computation abstraction</li>
+    
+Implement a compiler for the designed language, complete with:
+<li>A parser</li>
+<li>A typechecker / static semantic analyzer</li>
+<li>A code generator</li>
 
 ## Authors
 
