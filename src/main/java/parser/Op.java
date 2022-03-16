@@ -1,5 +1,5 @@
 package parser;
 
-public interface Op {
+public interface Op extends Node {
     
 }
