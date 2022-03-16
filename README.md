@@ -83,6 +83,8 @@ program ::= classdef* exp exp is the entry point
 
 ```
 
+# Features
+
 Computation Abstraction Non-Trivial Feature: Class based inheritance + Methods
 
 Non-Trivial Feature #2: Subtyping
@@ -90,3 +92,17 @@ Non-Trivial Feature #2: Subtyping
 Non-Trivial Feature #3: Type Casting
 
 Work Planned for Custom Component: Access Modifiers
+
+# Testing
+
+To run the tests:
+
+```
+mvn compile
+mvn test
+```
+To view reports: 
+```
+mvn jacoco: report
+open target/site/jacoco/index.html
+```
