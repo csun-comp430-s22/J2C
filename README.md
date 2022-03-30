@@ -48,7 +48,7 @@ i is an integer
 ```
 type:: = int | bool | void | Built-in types
     classname; includes Object and String
-op:: = + | - | * | / | < | > | Arithmetic operations
+op:: = * | / | + | - | % | < | > | == | != Arithmetic operations
 exp:: = var | str | i | Variables, strings, and integers are expressions
 this | Refers to my instance
 exp op exp | Arithmetic operations
