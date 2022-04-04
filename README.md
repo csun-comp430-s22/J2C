@@ -1,48 +1,42 @@
 ![Logo](images/J2Clogo.png)
 
 
-# Project Title
+# COMP 430: Language Design and Compilers
 
+Language Name: <b>J2C</b>
 
-Design a programming language: J2C
+## Goal
 
-The goal for us is to pass this class and try to learn how to make a compiler and since we are all familiar with Java it makes sense to do it in Java. We are choosing C as our target language because some of our members have some experience with C and it's not too low level for us to understand and explain to other members of the group.
+Design a programming language with:
 
-## Appendix
+<li>Concrete and abstract syntax</li>
+<li>Statically-checked types</li>
+<li>Expressions</li>
+<li>Subroutines</li>
+<li>Mechanisms for computation abstraction</li>
+<br>
 
-Design this programming language with:
-    • Concrete and abstract syntax
-    • Statically-checked types
-    • Expressions
-    • Subroutines
-    • Mechanisms for computation abstraction
-• Implement a compiler for the designed language, complete with:
-    • A parser
-    • A typechecker / static semantic analyzer
-    • A code generator
+Implement a compiler for the designed language, complete with:
+
+<li>A parser</li>
+<li>A typechecker / static semantic analyzer</li>
+<li>A code generator</li>
 
 ## Authors
-
-    Ibtehaz Utsay
-    Ziaur Chowdhury
-    Noah Reidinger
-    Ryan Nieto
-    Leo Babakhanian
-    Vardges Harutyunyan
+<pre>
+Ibtehaz Utsay
+Ziaur Chowdhury
+Noah Reidinger
+Ryan Nieto
+Leo Babakhanian
+Vardges Harutyunyan
+</pre>
 
 ## Documentation
 
-Documentation Link (<https://docs.google.com/document/d/1mQWRqwIdn_nY9M3pWh7nB8k_Ht-t0xxur-jjfsBvdB4/edit>)
-
-Language Name: J2C
-
-Compiler Implementation Language and Reasoning: We are all comfortable working with Java and it’s needless to experiment with a new language at this time.
-
-Planned Restrictions: We don’t know quite yet.
+Link to Initial Proposal: (<https://docs.google.com/document/d/1mQWRqwIdn_nY9M3pWh7nB8k_Ht-t0xxur-jjfsBvdB4/edit>)
 
 Target Language: C
-
-Language Description: J2C (Java to C). The goal for us is to pass this class and try to learn how to make a compiler and since we are all familiar with Java it makes sense to do it in Java. We are choosing C as our target language because some of our members have some experience with C and it's not too low level for us to understand and explain to other members of the group.
 
 <h3>Abstract Syntax:</h3>
 var is a variable
@@ -54,7 +48,7 @@ i is an integer
 ```
 type:: = int | bool | void | Built-in types
     classname; includes Object and String
-op:: = + | - | * | / | < | > | Arithmetic operations
+op:: = * | / | + | - | % | < | > | == | != Arithmetic operations
 exp:: = var | str | i | Variables, strings, and integers are expressions
 this | Refers to my instance
 exp op exp | Arithmetic operations
