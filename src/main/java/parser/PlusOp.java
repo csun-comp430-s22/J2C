@@ -8,7 +8,7 @@ public class PlusOp implements Op {
         return o instanceof PlusOp;
     }
     public String toString() {
-        return "+";
+        return "PlusOp";
     }
     
 }
