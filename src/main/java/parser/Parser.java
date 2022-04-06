@@ -60,7 +60,12 @@ public class Parser {
             final String name = ((VariableToken)token).name;
             return new ParseResult<Exp>(new VariableExp(new Variable(name)),
                                         position + 1);
-        } else if (token instanceof IntegerToken) {
+        }
+        // } else if(token instanceof StringTypeToken) ---- StringTypeToken or StringToken{
+
+        // }
+        
+        else if (token instanceof IntegerToken) {
             final int value = ((IntegerToken)token).value;
             return new ParseResult<Exp>(new IntegerExp(value), position + 1);
         } else if (token instanceof LeftParenToken) {
