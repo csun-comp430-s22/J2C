@@ -7,15 +7,6 @@ Language Name: <b>J2C</b>
 
 ## Goal
 
-Design a programming language with:
-
-<li>Concrete and abstract syntax</li>
-<li>Statically-checked types</li>
-<li>Expressions</li>
-<li>Subroutines</li>
-<li>Mechanisms for computation abstraction</li>
-<br>
-
 Implement a compiler for the designed language, complete with:
 
 <li>A parser</li>
