@@ -213,6 +213,54 @@ public class ParserTest {
         assertEquals(new ParseResult<Exp>(expected, 5),
                      parser.parseGreaterThanExp(0));
     }
+
+    @Test
+    public void testDoubleEqualsOperator() throws ParserException {
+        // 1 == 2
+        final Parser parser = new Parser(Arrays.asList(new IntegerToken(1),
+                                                       new EqualsToken(),
+                                                       new IntegerToken(2)));
+        final Exp expected = new OpExp(new IntegerLiteralExp(1),
+                                       new DoubleEqualsOp(),
+                                       new IntegerLiteralExp(2));
+        assertEquals(new ParseResult<Exp>(expected, 3),
+                     parser.parseEqualsExp(0));
+    }
+
+    @Test
+    public void testEqualsOperator() throws ParserException {
+        // 1 = 2
+        final Parser parser = new Parser(Arrays.asList(new IntegerToken(1),
+                                                       new AssignmentToken(),
+                                                       new IntegerToken(2)));
+        final Exp expected = new OpExp(new IntegerLiteralExp(1),
+                                       new EqualsOp(),
+                                       new IntegerLiteralExp(2));
+        assertEquals(new ParseResult<Exp>(expected, 3),
+                     parser.parseEqualsExp(0));
+    }
+    @Test
+    public void testPeriodOperator() throws ParserException {
+        // 1 . 2
+        final Parser parser = new Parser(Arrays.asList(new IntegerToken(1),
+                                                       new PeriodToken(),
+                                                       new IntegerToken(2)));
+        final Exp expected = new OpExp(new IntegerLiteralExp(1),
+                                       new PeriodOp(),
+                                       new IntegerLiteralExp(2));
+        assertEquals(new ParseResult<Exp>(expected, 3),
+                     parser.parseDotExp(0));
+    }
+    @Test //fails ----- wait now it works!  
+    public void testPrintlnParse() throws ParserException {
+   
+        final Parser parser = new Parser(Arrays.asList(new PrintlnToken(),
+                                                       new LeftParenToken(), new IntegerToken(2), new RightParenToken(), new SemiColonToken()));
+        final PrintlnStmt expected = new PrintlnStmt(new IntegerLiteralExp(2));
+        assertEquals(new ParseResult<Stmt>(expected, 5),
+                     parser.parseStmt(0));
+        
+    }
     
 
 }
