@@ -67,7 +67,7 @@ public class Parser {
         
         else if (token instanceof IntegerToken) {
             final int value = ((IntegerToken)token).value;
-            return new ParseResult<Exp>(new IntegerExp(value), position + 1);
+            return new ParseResult<Exp>(new IntegerLiteralExp(value), position + 1);
         } else if (token instanceof LeftParenToken) {
             final ParseResult<Exp> inParens = parseExp(position + 1);
             assertTokenHereIs(inParens.position, new RightParenToken());

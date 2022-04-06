@@ -11,32 +11,32 @@ import org.junit.Test;
 public class ParserTest {
     @Test
     public void testEqualsOpExp() {
-        final OpExp first = new OpExp(new IntegerExp(1),
+        final OpExp first = new OpExp(new IntegerLiteralExp(1),
                                       new PlusOp(),
-                                      new IntegerExp(1));
-        final OpExp second = new OpExp(new IntegerExp(1),
+                                      new IntegerLiteralExp(1));
+        final OpExp second = new OpExp(new IntegerLiteralExp(1),
                                       new PlusOp(),
-                                      new IntegerExp(1));
+                                      new IntegerLiteralExp(1));
         assertEquals(first, second);
     }
     @Test
     public void testDoubleEqualsOp() throws ParserException {
-        final OpExp first = new OpExp(new IntegerExp(1),
+        final OpExp first = new OpExp(new IntegerLiteralExp(1),
                                       new DoubleEqualsOp(),
-                                      new IntegerExp(1));
-        final OpExp second = new OpExp(new IntegerExp(1),
+                                      new IntegerLiteralExp(1));
+        final OpExp second = new OpExp(new IntegerLiteralExp(1),
                                       new DoubleEqualsOp(),
-                                      new IntegerExp(1));
+                                      new IntegerLiteralExp(1));
         assertEquals(first, second);
     }
     @Test
     public void testNotEqualsOp() throws ParserException {
-        final OpExp first = new OpExp(new IntegerExp(1),
+        final OpExp first = new OpExp(new IntegerLiteralExp(1),
                                       new NotEqualsOp(),
-                                      new IntegerExp(1));
-        final OpExp second = new OpExp(new IntegerExp(1),
+                                      new IntegerLiteralExp(1));
+        final OpExp second = new OpExp(new IntegerLiteralExp(1),
                                       new NotEqualsOp(),
-                                      new IntegerExp(1));
+                                      new IntegerLiteralExp(1));
         assertEquals(first, second);
     }
 
@@ -51,7 +51,7 @@ public class ParserTest {
     @Test
     public void testPrimaryInteger() throws ParserException {
         final Parser parser = new Parser(Arrays.asList(new IntegerToken(123)));
-        assertEquals(new ParseResult<Exp>(new IntegerExp(123), 1),
+        assertEquals(new ParseResult<Exp>(new IntegerLiteralExp(123), 1),
                      parser.parsePrimaryExp(0));
     }
 
@@ -61,7 +61,7 @@ public class ParserTest {
         final Parser parser = new Parser(Arrays.asList(new LeftParenToken(),
                                                        new IntegerToken(123),
                                                        new RightParenToken()));
-        assertEquals(new ParseResult<Exp>(new IntegerExp(123), 3),
+        assertEquals(new ParseResult<Exp>(new IntegerLiteralExp(123), 3),
                      parser.parsePrimaryExp(0));
     }
 
@@ -96,7 +96,7 @@ public class ParserTest {
     @Test
     public void testAdditiveExpOnlyPrimary() throws ParserException {
         final Parser parser = new Parser(Arrays.asList(new IntegerToken(123)));
-        assertEquals(new ParseResult<Exp>(new IntegerExp(123), 1),
+        assertEquals(new ParseResult<Exp>(new IntegerLiteralExp(123), 1),
                      parser.parseAdditiveExp(0));
     }
 
@@ -106,9 +106,9 @@ public class ParserTest {
         final Parser parser = new Parser(Arrays.asList(new IntegerToken(1),
                                                        new AdditionToken(),
                                                        new IntegerToken(2)));
-        assertEquals(new ParseResult<Exp>(new OpExp(new IntegerExp(1),
+        assertEquals(new ParseResult<Exp>(new OpExp(new IntegerLiteralExp(1),
                                                     new PlusOp(),
-                                                    new IntegerExp(2)),
+                                                    new IntegerLiteralExp(2)),
                                           3),
                      parser.parseAdditiveExp(0));
     }
@@ -121,11 +121,11 @@ public class ParserTest {
                                                        new IntegerToken(2),
                                                        new SubtractionToken(),
                                                        new IntegerToken(3)));
-        final Exp expected = new OpExp(new OpExp(new IntegerExp(1),
+        final Exp expected = new OpExp(new OpExp(new IntegerLiteralExp(1),
                                                  new PlusOp(),
-                                                 new IntegerExp(2)),
+                                                 new IntegerLiteralExp(2)),
                                        new SubtractionOp(),
-                                       new IntegerExp(3));
+                                       new IntegerLiteralExp(3));
         assertEquals(new ParseResult<Exp>(expected, 5),
                      parser.parseAdditiveExp(0));
     }
@@ -133,7 +133,7 @@ public class ParserTest {
     @Test
     public void testLessThanExpOnlyAdditive() throws ParserException {
         final Parser parser = new Parser(Arrays.asList(new IntegerToken(123)));
-        assertEquals(new ParseResult<Exp>(new IntegerExp(123), 1),
+        assertEquals(new ParseResult<Exp>(new IntegerLiteralExp(123), 1),
                      parser.parseLessThanExp(0));
     }
 
@@ -143,9 +143,9 @@ public class ParserTest {
         final Parser parser = new Parser(Arrays.asList(new IntegerToken(1),
                                                        new LessThanToken(),
                                                        new IntegerToken(2)));
-        final Exp expected = new OpExp(new IntegerExp(1),
+        final Exp expected = new OpExp(new IntegerLiteralExp(1),
                                        new LessThanOp(),
-                                       new IntegerExp(2));
+                                       new IntegerLiteralExp(2));
         assertEquals(new ParseResult<Exp>(expected, 3),
                      parser.parseLessThanExp(0));
     }
@@ -158,11 +158,11 @@ public class ParserTest {
                                                        new IntegerToken(2),
                                                        new LessThanToken(),
                                                        new IntegerToken(3)));
-        final Exp expected = new OpExp(new OpExp(new IntegerExp(1),
+        final Exp expected = new OpExp(new OpExp(new IntegerLiteralExp(1),
                                                  new LessThanOp(),
-                                                 new IntegerExp(2)),
+                                                 new IntegerLiteralExp(2)),
                                        new LessThanOp(),
-                                       new IntegerExp(3));
+                                       new IntegerLiteralExp(3));
         assertEquals(new ParseResult<Exp>(expected, 5),
                      parser.parseLessThanExp(0));
     }
@@ -175,11 +175,11 @@ public class ParserTest {
                                                        new IntegerToken(2),
                                                        new AdditionToken(),
                                                        new IntegerToken(3)));
-        final Exp expected = new OpExp(new IntegerExp(1),
+        final Exp expected = new OpExp(new IntegerLiteralExp(1),
                                        new LessThanOp(),
-                                       new OpExp(new IntegerExp(2),
+                                       new OpExp(new IntegerLiteralExp(2),
                                                  new PlusOp(),
-                                                 new IntegerExp(3)));
+                                                 new IntegerLiteralExp(3)));
         assertEquals(new ParseResult<Exp>(expected, 5),
                      parser.parseLessThanExp(0));
     }
@@ -190,9 +190,9 @@ public class ParserTest {
         final Parser parser = new Parser(Arrays.asList(new IntegerToken(1),
                                                        new GreaterThanToken(),
                                                        new IntegerToken(2)));
-        final Exp expected = new OpExp(new IntegerExp(1),
+        final Exp expected = new OpExp(new IntegerLiteralExp(1),
                                        new GreaterThanOp(),
-                                       new IntegerExp(2));
+                                       new IntegerLiteralExp(2));
         assertEquals(new ParseResult<Exp>(expected, 3),
                      parser.parseGreaterThanExp(0));
     }
@@ -205,11 +205,11 @@ public class ParserTest {
                                                        new IntegerToken(2),
                                                        new GreaterThanToken(),
                                                        new IntegerToken(3)));
-        final Exp expected = new OpExp(new OpExp(new IntegerExp(1),
+        final Exp expected = new OpExp(new OpExp(new IntegerLiteralExp(1),
                                                  new GreaterThanOp(),
-                                                 new IntegerExp(2)),
+                                                 new IntegerLiteralExp(2)),
                                        new GreaterThanOp(),
-                                       new IntegerExp(3));
+                                       new IntegerLiteralExp(3));
         assertEquals(new ParseResult<Exp>(expected, 5),
                      parser.parseGreaterThanExp(0));
     }
