@@ -2,6 +2,7 @@ package parser;
 import lexer.*;
 
 import java.util.List;
+
 import java.util.ArrayList;
 
 public class Parser {
@@ -72,7 +73,6 @@ public class Parser {
         }
     }
 
-    
 
     public ParseResult<Op> parseAdditiveOp(final int position) throws ParserException {
         final Token token = getToken(position);
@@ -80,8 +80,12 @@ public class Parser {
             return new ParseResult<Op>(new PlusOp(), position + 1);
         } else if (token instanceof SubtractionToken) {
             return new ParseResult<Op>(new SubtractionOp(), position + 1);
+        } else if (token instanceof MultiplicationToken) {
+            return new ParseResult<Op>(new MultiplicationOp(), position + 1);
+        } else if (token instanceof DivisionToken) {
+            return new ParseResult<Op>(new DivisionOp(), position + 1);
         } else {
-            throw new ParserException("expected + or -; received: " + token);
+            throw new ParserException("Expected additive operator; received: " + token);
         }
     } 
 
@@ -105,45 +109,228 @@ public class Parser {
         return current;
     } 
 
-    public ParseResult<Exp> parseLessThanExp(final int position) throws ParserException {
+    public ParseResult<Exp> parseDotExp(final int position) throws ParserException {
         ParseResult<Exp> current = parseAdditiveExp(position);
         boolean shouldRun = true;
         
         while (shouldRun) {
             try {
-                assertTokenHereIs(current.position, new LessThanToken());
-                final ParseResult<Exp> other = parseAdditiveExp(current.position + 1);
+                assertTokenHereIs(current.position, new PeriodToken());
+                final ParseResult<Exp> anotherPrimary = parsePrimaryExp(current.position + 1);
                 current = new ParseResult<Exp>(new OpExp(current.result,
-                                                         new LessThanOp(),
-                                                         other.result),
-                                               other.position);
+                                                         new PeriodOp(),
+                                                         anotherPrimary.result),
+                                               anotherPrimary.position);
             } catch (final ParserException e) {
                 shouldRun = false;
             }
+          
         }
-
-        return current;
+        return current; 
     }
 
-    public ParseResult<Exp> parseEqualsExp(final int position) throws ParserException {
+    public ParseResult<Exp> parseLessThanExp(final int position) throws ParserException {
+        ParseResult<Exp> current = parseDotExp(position);
+        boolean shouldRun = true;
+        
+        while (shouldRun) {
+            try {
+                assertTokenHereIs(current.position, new LessThanToken());
+                final ParseResult<Exp> anotherPrimary = parseDotExp(current.position + 1);
+                current = new ParseResult<Exp>(new OpExp(current.result,
+                                                         new LessThanOp(),
+                                                         anotherPrimary.result),
+                                               anotherPrimary.position);
+            } catch (final ParserException e) {
+                shouldRun = false;
+            }
+          
+        }
+        return current; 
+    }
+
+    public ParseResult<Exp> parseGreaterThanExp(final int position) throws ParserException {
         ParseResult<Exp> current = parseLessThanExp(position);
         boolean shouldRun = true;
-
+        
+        while (shouldRun) {
+            try {
+                assertTokenHereIs(current.position, new GreaterThanToken());
+                final ParseResult<Exp> anotherPrimary = parseLessThanExp(current.position + 1);
+                current = new ParseResult<Exp>(new OpExp(current.result,
+                                                         new GreaterThanOp(),
+                                                         anotherPrimary.result),
+                                               anotherPrimary.position);
+            } catch (final ParserException e) {
+                shouldRun = false;
+            }
+          
+        }
+        return current; 
+    }
+    public ParseResult<Exp> parseDoubleEqualsExp(final int position) throws ParserException {
+        ParseResult<Exp> current = parseGreaterThanExp(position);
+        boolean shouldRun = true;
+        
         while (shouldRun) {
             try {
                 assertTokenHereIs(current.position, new EqualsToken());
-                final ParseResult<Exp> other = parseLessThanExp(current.position + 1);
+                final ParseResult<Exp> anotherPrimary = parseGreaterThanExp(current.position + 1);
                 current = new ParseResult<Exp>(new OpExp(current.result,
-                                                         new EqualsOp(),
-                                                         other.result),
-                                               other.position);
+                                                         new DoubleEqualsOp(),
+                                                         anotherPrimary.result),
+                                               anotherPrimary.position);
             } catch (final ParserException e) {
                 shouldRun = false;
             }
+          
         }
+        return current; 
+    }
+    public ParseResult<Exp> parseNotEqualsExp(final int position) throws ParserException {
+        ParseResult<Exp> current = parseDoubleEqualsExp(position);
+        boolean shouldRun = true;
+        
+        while (shouldRun) {
+            try {
+                assertTokenHereIs(current.position, new NotEqualsToken());
+                final ParseResult<Exp> anotherPrimary = parseDoubleEqualsExp(current.position + 1);
+                current = new ParseResult<Exp>(new OpExp(current.result,
+                                                         new NotEqualsOp(),
+                                                         anotherPrimary.result),
+                                               anotherPrimary.position);
+            } catch (final ParserException e) {
+                shouldRun = false;
+            }
+          
+        }
+        return current; 
+    }
 
-        return current;
-    } 
+    public ParseResult<Exp> parseEqualsExp(final int position) throws ParserException {
+        ParseResult<Exp> current = parseNotEqualsExp(position);
+        boolean shouldRun = true;
+        
+        while (shouldRun) {
+            try {
+                assertTokenHereIs(current.position, new AssignmentToken());
+                final ParseResult<Exp> anotherPrimary = parseNotEqualsExp(current.position + 1);
+                current = new ParseResult<Exp>(new OpExp(current.result,
+                                                         new EqualsOp(),
+                                                         anotherPrimary.result),
+                                               anotherPrimary.position);
+            } catch (final ParserException e) {
+                shouldRun = false;
+            }
+          
+        }
+        return current; 
+    }
+
+ 
+    
+
+
+
+    // public ParseResult<Exp> parseLessThanExp(final int position) throws ParserException {
+    //     ParseResult<Exp> current = parseAdditiveExp(position);
+    //     boolean shouldRun = true;
+        
+    //     while (shouldRun) {
+    //         try {
+    //             assertTokenHereIs(current.position, new LessThanToken());
+    //             final ParseResult<Exp> other = parseAdditiveExp(current.position + 1);
+    //             current = new ParseResult<Exp>(new OpExp(current.result,
+    //                                                      new LessThanOp(),
+    //                                                      other.result),
+    //                                            other.position);
+    //         } catch (final ParserException e) {
+    //             shouldRun = false;
+    //         }
+    //     }
+
+    //     return current;
+    // }
+
+    // public ParseResult<Exp> parseEqualsExp(final int position) throws ParserException {
+    //     ParseResult<Exp> current = parseLessThanExp(position);
+    //     boolean shouldRun = true;
+
+    //     while (shouldRun) {
+    //         try {
+    //             assertTokenHereIs(current.position, new EqualsToken());
+    //             final ParseResult<Exp> other = parseLessThanExp(current.position + 1);
+    //             current = new ParseResult<Exp>(new OpExp(current.result,
+    //                                                      new EqualsOp(),
+    //                                                      other.result),
+    //                                            other.position);
+    //         } catch (final ParserException e) {
+    //             shouldRun = false;
+    //         }
+    //     }
+
+    //     return current;
+    // } 
+
+    // public ParseResult<Exp> parseGreaterThanExp(final int position) throws ParserException {
+    //     ParseResult<Exp> current = parseEqualsExp(position);
+    //     boolean shouldRun = true;
+
+    //     while (shouldRun) {
+    //         try {
+    //             assertTokenHereIs(current.position, new GreaterThanToken());
+    //             final ParseResult<Exp> other = parseEqualsExp(current.position + 1);
+    //             current = new ParseResult<Exp>(new OpExp(current.result,
+    //                                                      new GreaterThanOp(),
+    //                                                      other.result),
+    //                                            other.position);
+    //         } catch (final ParserException e) {
+    //             shouldRun = false;
+    //         }
+    //     }
+
+    //     return current;
+    // }
+
+    // public ParseResult<Exp> parseDoubleEqualsExp(final int position) throws ParserException {
+    //     ParseResult<Exp> current = parseGreaterThanExp(position);
+    //     boolean shouldRun = true;
+
+    //     while (shouldRun) {
+    //         try {
+    //             assertTokenHereIs(current.position, new EqualsToken());
+    //             final ParseResult<Exp> other = parseGreaterThanExp(current.position + 1);
+    //             current = new ParseResult<Exp>(new OpExp(current.result,
+    //                                                      new DoubleEqualsOp(),
+    //                                                      other.result),
+    //                                            other.position);
+    //         } catch (final ParserException e) {
+    //             shouldRun = false;
+    //         }
+    //     }
+
+    //     return current;
+    // }
+    // public ParseResult<Exp> parseDivideExp(final int position) throws ParserException {
+    //     ParseResult<Exp> current = parseDoubleEqualsExp(position);
+    //     boolean shouldRun = true;
+
+    //     while (shouldRun) {
+    //         try {
+    //             assertTokenHereIs(current.position, new DivisionToken());
+    //             final ParseResult<Exp> other = parseDoubleEqualsExp(current.position + 1);
+    //             current = new ParseResult<Exp>(new OpExp(current.result,
+    //                                                      new DivisionOp(),
+    //                                                      other.result),
+    //                                            other.position);
+    //         } catch (final ParserException e) {
+    //             shouldRun = false;
+    //         }
+    //     }
+
+    //     return current;
+    // }
+    
 
     public ParseResult<Exp> parseExp(final int position) throws ParserException {
         return parseEqualsExp(position);
