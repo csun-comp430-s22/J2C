@@ -246,7 +246,7 @@ public class TokenizerTest {
     @Test
     public void StringTypeToken() throws TokenizerException {
         assertTokenizes("string",
-                new Token[] { new StringToken() });
+                new Token[] { new StrToken() });
     }
 
     @Test
