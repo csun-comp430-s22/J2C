@@ -228,13 +228,13 @@ public class TokenizerTest {
     @Test
     public void testVoidTypeToken() throws TokenizerException {
         assertTokenizes("void",
-                new Token[] { new VoidTypeToken() });
+                new Token[] { new VoidToken() });
     }
 
     @Test
     public void testBooleanTypeToken() throws TokenizerException {
         assertTokenizes("bool",
-                new Token[] { new BooleanTypeToken() });
+                new Token[] { new BooleanToken() });
     }
 
     @Test
@@ -246,13 +246,13 @@ public class TokenizerTest {
     @Test
     public void StringTypeToken() throws TokenizerException {
         assertTokenizes("string",
-                new Token[] { new StringTypeToken() });
+                new Token[] { new StrToken() });
     }
 
     @Test
     public void IntTypeToken() throws TokenizerException {
         assertTokenizes("int",
-                new Token[] { new IntTypeToken() });
+                new Token[] { new IntToken() });
     }
 
     @Test
