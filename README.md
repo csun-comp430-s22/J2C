@@ -75,7 +75,7 @@ classname is the name of a class
 methodname is the name of a method
 str is a string
 i is an integer
-type:: = int | bool | void | Built-in types
+type:: = int | bool | void | str
 primary_exp ::= x | i | `(` exp `)` | x.methodname(exp*)
 dot_exp ::= additive_exp (`.` additive_exp)*
 additive_op ::= + | -
