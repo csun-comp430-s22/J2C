@@ -178,7 +178,6 @@ public class ParserTest {
 
 	@Test
 	public void testAdditiveExpMultiOperator() throws ParserException {
-		// 1 + 2 - 3 ==> (1 + 2) - 3
 		final Parser parser = new Parser(Arrays.asList(new IntegerToken(1),
 				new AdditionToken(),
 				new IntegerToken(2),

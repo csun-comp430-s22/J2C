@@ -53,7 +53,7 @@ public class Parser {
     }
 
 
-    public ParseResult<Type> parseType(final int position) throws ParserException {
+    public ParseResult<Type> parseType(int position) throws ParserException {
         final Token token = getToken(position);
         if (token instanceof IntToken) {
             return new ParseResult<Type>(new IntType(), position + 1);
