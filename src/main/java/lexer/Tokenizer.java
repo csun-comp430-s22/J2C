@@ -76,15 +76,15 @@ public class Tokenizer {
             } else if (name.equals("break")) {
                 return new BreakToken();
             } else if (name.equals("void")) {
-                return new VoidTypeToken();
+                return new VoidToken();
             } else if (name.equals("bool")) {
-                return new BooleanTypeToken();
+                return new BooleanToken();
             } else if (name.equals("println")) {
                 return new PrintlnToken();
             } else if (name.equals("string")) {
-                return new StringTypeToken();
+                return new StringToken();
             } else if (name.equals("int")) {
-                return new IntTypeToken();
+                return new IntToken();
             } else {
                 return new VariableToken(name);
             }
