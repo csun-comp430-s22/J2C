@@ -1,8 +1,9 @@
 package parser;
 
-public class EqualsOp implements Op {
+public class GreaterThanOp implements Op {
+
     public boolean equals(final Object other) {
-        return other instanceof EqualsOp;
+        return other instanceof GreaterThanOp;
     }
 
     public int hashCode() {
@@ -10,6 +11,9 @@ public class EqualsOp implements Op {
     }
 
     public String toString() {
-        return "EqualsOp";
+        return "GreaterThanOp";
     }
+
+
+    
 }
