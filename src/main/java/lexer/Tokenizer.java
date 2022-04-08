@@ -82,7 +82,7 @@ public class Tokenizer {
             } else if (name.equals("println")) {
                 return new PrintlnToken();
             } else if (name.equals("string")) {
-                return new StringToken();
+                return new StrToken();
             } else if (name.equals("int")) {
                 return new IntToken();
             } else {
