@@ -70,12 +70,12 @@ program ::= classdef* exp exp is the entry point
 ```
 ### New Grammar (Not left-recursive and handles operator precedence)
 ```
-x is a variable
+var is a variable
 classname is the name of a class
 methodname is the name of a method
 str is a string
 i is an integer
-type:: = int | bool | void | str
+type:: = int | bool | void | str | classname
 primary_exp ::= x | i | `(` exp `)` | x.methodname(exp*)
 dot_exp ::= additive_exp (`.` additive_exp)*
 additive_op ::= + | -
