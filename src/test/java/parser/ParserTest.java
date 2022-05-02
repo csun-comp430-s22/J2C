@@ -1233,13 +1233,13 @@ public class ParserTest {
                 new IntegerToken(2),
                 new SemiColonToken(), new RightCurlyToken()));
         final ClassName classname = new ClassName("Foo");
-        final ClassName extendsClassname = new ClassName("Bar");
+        final ClassName extendsClassName = new ClassName("Bar");
         final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
         final List<Param> params = new ArrayList<Param>();
         final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
         final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
         final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(
-                new ClassDef(classname, extendsClassname, vardecs, params, stmt, methoddefs), 13);
+                new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs), 13);
         assertEquals(expected, parser.parseClassdef(0));
     }
 
@@ -1286,7 +1286,7 @@ public class ParserTest {
                 new LeftParenToken(), new RightParenToken(), new IntegerToken(1), new AdditionToken(),
                 new IntegerToken(2), new SemiColonToken(), new RightCurlyToken()));
         final ClassName classname = new ClassName("Foo");
-        final ClassName extendsClassname = new ClassName("Bar");
+        final ClassName extendsClassName = new ClassName("Bar");
         final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
         final VariableDeclaration vardec = new VariableDeclaration(new StringType(),
                 new VariableExp(new Variable("text")), new StringLiteralExp("Hello"));
@@ -1295,7 +1295,7 @@ public class ParserTest {
         final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
         final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
         final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(
-                new ClassDef(classname, extendsClassname, vardecs, params, stmt, methoddefs), 18);
+                new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs), 18);
         assertEquals(expected, parser.parseClassdef(0));
     }
 
@@ -1341,7 +1341,7 @@ public class ParserTest {
                 new LeftParenToken(), new RightParenToken(), new IntegerToken(1), new AdditionToken(),
                 new IntegerToken(2), new SemiColonToken(), new RightCurlyToken()));
         final ClassName classname = new ClassName("Foo");
-        final ClassName extendsClassname = new ClassName("Bar");
+        final ClassName extendsClassName = new ClassName("Bar");
         final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
         final VariableDeclaration vardec = new VariableDeclaration(new IntType(), new VariableExp(new Variable("x")),
                 new IntegerLiteralExp(5));
@@ -1350,7 +1350,7 @@ public class ParserTest {
         final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
         final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
         final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(
-                new ClassDef(classname, extendsClassname, vardecs, params, stmt, methoddefs), 18);
+                new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs), 18);
         assertEquals(expected, parser.parseClassdef(0));
     }
 
@@ -1364,12 +1364,12 @@ public class ParserTest {
     @Test
     public void testParseClassDefTest7() throws ParserException {
         final Parser parser = new Parser(
-                Arrays.asList(new ClassToken(), new VariableToken("Dog"), new LeftCurlyToken(), new BooleanToken(),
+                Arrays.asList(new ClassToken(), new VariableToken("Foo"), new LeftCurlyToken(), new BooleanToken(),
                         new VariableToken("x"), new AssignmentToken(), new FalseToken(), new SemiColonToken(),
-                        new VariableToken("Dog"), new LeftParenToken(),
+                        new VariableToken("Foo"), new LeftParenToken(),
                         new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
                         new SemiColonToken(), new RightCurlyToken()));
-        final ClassName classname = new ClassName("Dog");
+        final ClassName classname = new ClassName("Foo");
         final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
         final VariableDeclaration vardec = new VariableDeclaration(new BoolType(), new VariableExp(new Variable("x")),
                 new FalseExp());
@@ -1384,7 +1384,7 @@ public class ParserTest {
 
     /*
      * class Foo extends Bar() {
-     * Boolean x = true;
+     * Boolean x = false;
      * Foo()
      * 1 + 2;
      * }
@@ -1392,14 +1392,14 @@ public class ParserTest {
     @Test
     public void testParseClassDefTest8() throws ParserException {
         final Parser parser = new Parser(
-                Arrays.asList(new ClassToken(), new VariableToken("Dog"), new ExtendsToken(),
-                        new VariableToken("Cat"), new LeftCurlyToken(), new BooleanToken(),
+                Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                        new VariableToken("Bar"), new LeftCurlyToken(), new BooleanToken(),
                         new VariableToken("x"), new AssignmentToken(), new FalseToken(), new SemiColonToken(),
-                        new VariableToken("Dog"), new LeftParenToken(),
+                        new VariableToken("Foo"), new LeftParenToken(),
                         new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
                         new SemiColonToken(), new RightCurlyToken()));
-        final ClassName classname = new ClassName("Dog");
-        final ClassName extendsClassname = new ClassName("Cat");
+        final ClassName classname = new ClassName("Foo");
+        final ClassName extendsClassName = new ClassName("Bar");
         final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
         final VariableDeclaration vardec = new VariableDeclaration(new BoolType(), new VariableExp(new Variable("x")),
                 new FalseExp());
@@ -1408,7 +1408,7 @@ public class ParserTest {
         final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
         final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
         final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(
-                new ClassDef(classname, extendsClassname, vardecs, params, stmt, methoddefs), 18);
+                new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs), 18);
         assertEquals(expected, parser.parseClassdef(0));
     }
 
@@ -1424,7 +1424,8 @@ public class ParserTest {
     public void testParseClassDefTest9() throws ParserException {
         final Parser parser = new Parser(
                 Arrays.asList(new ClassToken(), new VariableToken("Foo"), new LeftCurlyToken(), new StrToken(),
-                        new VariableToken("text"), new AssignmentToken(), new StringToken("Hello World"), new SemiColonToken(),
+                        new VariableToken("text"), new AssignmentToken(), new StringToken("Hello World"),
+                        new SemiColonToken(),
                         new VariableToken("Foo"), new LeftParenToken(),
                         new IntToken(), new VariableToken("x"), new RightParenToken(), new IntegerToken(1),
                         new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
@@ -1457,13 +1458,14 @@ public class ParserTest {
         final Parser parser = new Parser(
                 Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
                         new VariableToken("Bar"), new LeftCurlyToken(), new StrToken(),
-                        new VariableToken("text"), new AssignmentToken(), new StringToken("Hello World"), new SemiColonToken(),
+                        new VariableToken("text"), new AssignmentToken(), new StringToken("Hello World"),
+                        new SemiColonToken(),
                         new VariableToken("Foo"), new LeftParenToken(),
                         new IntToken(), new VariableToken("x"), new RightParenToken(), new IntegerToken(1),
                         new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
                         new RightCurlyToken()));
         final ClassName classname = new ClassName("Foo");
-        final ClassName extendsClassname = new ClassName("Bar");
+        final ClassName extendsClassName = new ClassName("Bar");
         final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
         final VariableDeclaration vardec = new VariableDeclaration(new StringType(),
                 new VariableExp(new Variable("text")), new StringLiteralExp("Hello World"));
@@ -1474,70 +1476,455 @@ public class ParserTest {
         final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
         final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
         final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(
-                new ClassDef(classname, extendsClassname, vardecs, params, stmt, methoddefs), 20);
+                new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs), 20);
         assertEquals(expected, parser.parseClassdef(0));
     }
 
-
     /*
      * class Foo extends Bar {
-     * String text "Hello World";
+     * 
      * Foo(int x, int y)
      * 1 + 2;
      * 
      * }
-
+     * 
      */
     @Test
     public void testParseClassDefTest11() throws ParserException {
-        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Dog"), new ExtendsToken(), new VariableToken("Animal"), new LeftCurlyToken(), new VariableToken("Dog"), new LeftParenToken(),
-														new IntToken(), new VariableToken("x"),	new CommaToken(), new IntToken(), new VariableToken("y"), new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2), new SemiColonToken(), 
-														new RightCurlyToken()));
-		final ClassName classname = new ClassName("Dog");
-		final ClassName extendsClassname = new ClassName("Animal");
-		final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
-		final List<Param> params = new ArrayList<Param>();
-		final Param param = new Param(new IntType(), new VariableExp(new Variable("x")));
-		final Param param1 = new Param(new IntType(), new VariableExp(new Variable("y")));
-		params.add(param);
-		params.add(param1);
-		final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
-		final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
-		final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(new ClassDef(classname, extendsClassname, vardecs, params, stmt, methoddefs), 18);
-		assertEquals(expected, parser.parseClassdef(0));   
-     }
- 
-   
-/*
-    // // foo.bar()
-    // @Test
-    // public void testVarMethodCall() throws ParserException {
-    // final Parser parser = new Parser(Arrays.asList(new VariableToken("foo"), new
-    // PeriodToken(),
-    // new VariableToken("bar"), new LeftParenToken(), new RightParenToken()));
-    // final Exp variable = new VariableExp(new Variable("foo"));
-    // final Exp name = new VariableExp(new Variable("bar"));
-    // final List<Exp> inside = new ArrayList<>();
-    // assertEquals(new ParseResult<Exp>(new VarMethodNameCallExp(variable, name,
-    // inside), 5),
-    // parser.parseVarMethodNameCallExp(0));
-    // }
-
-    // @Test
-    // public void testVarAssignExp() throws ParserException {
-    // final Parser parser = new Parser(Arrays.asList(new IntToken(), new
-    // VariableToken("foo"), new AssignmentToken(),
-    // new IntegerToken(5), new SemiColonToken()));
-    // final Type type = new IntType();
-
-    // final Exp variable = new VariableExp(new Variable("foo"));
-    // final Exp value = new IntegerLiteralExp(5);
-    // assertEquals(new ParseResult<VarDec>(new VariableDeclaration(type, variable,
-    // value), 5), parser.parseVarDec(0));
-
-    // }
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new VariableToken("Foo"), new LeftParenToken(),
+                new IntToken(), new VariableToken("x"), new CommaToken(), new IntToken(), new VariableToken("y"),
+                new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
+                new SemiColonToken(),
+                new RightCurlyToken()));
+        final ClassName classname = new ClassName("Foo");
+        final ClassName extendsClassName = new ClassName("Bar");
+        final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
+        final List<Param> params = new ArrayList<Param>();
+        final Param param = new Param(new IntType(), new VariableExp(new Variable("x")));
+        final Param param1 = new Param(new IntType(), new VariableExp(new Variable("y")));
+        params.add(param);
+        params.add(param1);
+        final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
+        final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
+        final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(
+                new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs), 18);
+        assertEquals(expected, parser.parseClassdef(0));
+    }
 
     /*
+     * class Foo extends Bar {
+     * String text = "Hello World";
+     * Foo(int x)
+     * 1 + 2;
+     * Boolean Baz() {
+     * true;
+     * }
+     * }
+     */
+    @Test
+    public void testParseClassDefTest12() throws ParserException {
+        final Parser parser = new Parser(
+                Arrays.asList(new ClassToken(), new VariableToken("Foo"), new LeftCurlyToken(), new StrToken(),
+                        new VariableToken("text"), new AssignmentToken(), new StringToken("Hello World"),
+                        new SemiColonToken(), new VariableToken("Foo"), new LeftParenToken(),
+                        new IntToken(), new VariableToken("x"), new RightParenToken(), new IntegerToken(1),
+                        new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
+                        new BooleanToken(), new VariableToken("Baz"), new LeftParenToken(), new RightParenToken(),
+                        new LeftCurlyToken(), new TrueToken(), new SemiColonToken(),
+                        new RightCurlyToken(), new RightCurlyToken()));
+        final ClassName classname = new ClassName("Foo");
+        final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
+        final VariableDeclaration vardec = new VariableDeclaration(new StringType(),
+                new VariableExp(new Variable("text")), new StringLiteralExp("Hello World"));
+        vardecs.add(vardec);
+        final List<Param> params = new ArrayList<Param>();
+        final Param param = new Param(new IntType(), new VariableExp(new Variable("x")));
+        params.add(param);
+        final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
+        final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
+        final List<Param> methodParams = new ArrayList<Param>();
+        final List<Stmt> stmts = new ArrayList<Stmt>();
+        final Stmt methodStmt = new ExpStmt(new TrueExp());
+        stmts.add(methodStmt);
+        final Stmt blockStmt = new BlockStmt(stmts);
+        final MethodDef MethodDef = new MethodDef(new BoolType(), new MethodName("Baz"), methodParams, blockStmt);
+        methoddefs.add(MethodDef);
+        final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(
+                new ClassDef(classname, new ClassName(""), vardecs, params, stmt, methoddefs), 26);
+        assertEquals(expected, parser.parseClassdef(0));
+    }
+
+    /*
+     * class Foo extends Bar {
+     * String text = "Hello World";
+     * Foo(int x, int y)
+     * 1 + 2;
+     * Boolean Baz() {
+     * true;
+     * }
+     * }
+     */
+    @Test
+    public void testParseClassDefTest13() throws ParserException {
+        final Parser parser = new Parser(
+                Arrays.asList(new ClassToken(), new VariableToken("Foo"), new LeftCurlyToken(), new StrToken(),
+                        new VariableToken("text"), new AssignmentToken(), new StringToken("Hello World"),
+                        new SemiColonToken(), new VariableToken("Foo"), new LeftParenToken(),
+                        new IntToken(), new VariableToken("x"), new RightParenToken(), new IntegerToken(1),
+                        new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
+                        new BooleanToken(), new VariableToken("Baz"), new LeftParenToken(), new RightParenToken(),
+                        new LeftCurlyToken(), new TrueToken(), new SemiColonToken(),
+                        new RightCurlyToken(), new RightCurlyToken()));
+        final ClassName classname = new ClassName("Foo");
+        final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
+        final VariableDeclaration vardec = new VariableDeclaration(new StringType(),
+                new VariableExp(new Variable("text")), new StringLiteralExp("Hello World"));
+        vardecs.add(vardec);
+        final List<Param> params = new ArrayList<Param>();
+        final Param param = new Param(new IntType(), new VariableExp(new Variable("x")));
+        params.add(param);
+        final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
+        final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
+        final List<Param> methodParams = new ArrayList<Param>();
+        final List<Stmt> stmts = new ArrayList<Stmt>();
+        final Stmt methodStmt = new ExpStmt(new TrueExp());
+        stmts.add(methodStmt);
+        final Stmt blockStmt = new BlockStmt(stmts);
+        final MethodDef MethodDef = new MethodDef(new BoolType(), new MethodName("Baz"), methodParams, blockStmt);
+        methoddefs.add(MethodDef);
+        final ParseResult<ClassDef> expected = new ParseResult<ClassDef>(
+                new ClassDef(classname, new ClassName(""), vardecs, params, stmt, methoddefs), 26);
+        assertEquals(expected, parser.parseClassdef(0));
+
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException1() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new VariableToken("Foo"), new RightParenToken(),
+                new IntegerToken(1), new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
+                new RightCurlyToken()));
+        parser.parseClassdef(0);
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException2() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new VariableToken("Foo"), new RightParenToken(),
+                new IntegerToken(1), new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
+                new RightCurlyToken()));
+        parser.parseClassdef(0);
+
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException3() throws ParserException {
+        final Parser parser = new Parser(
+                Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(), new VariableToken("Bar"),
+                        new LeftCurlyToken(), new IntToken(), new LeftParenToken(), new RightParenToken(),
+                        new IntegerToken(1), new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
+                        new RightCurlyToken()));
+        parser.parseClassdef(0);
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException4() throws ParserException {
+        final Parser parser = new Parser(
+                Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(), new VariableToken("Bar"),
+                        new LeftCurlyToken(), new IntToken(), new LeftParenToken(), new RightParenToken(),
+                        new IntegerToken(1), new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
+                        new RightCurlyToken()));
+        parser.parseClassdef(0);
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException5() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new LeftCurlyToken(),
+                new IntToken(), new LeftParenToken(), new RightParenToken(),
+                new IntegerToken(1), new AdditionToken(), new IntegerToken(2), new SemiColonToken(),
+                new RightCurlyToken()));
+        parser.parseClassdef(0);
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException6() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new IntToken(),
+                new IntegerToken(2), new AssignmentToken(), new IntegerToken(5), new SemiColonToken(),
+                new VariableToken("Foo"), new LeftParenToken(),
+                new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
+                new SemiColonToken(), new RightCurlyToken()));
+        parser.parseClassdef(0);
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException7() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new IntToken(),
+                new IntegerToken(2), new AssignmentToken(), new IntegerToken(5), new SemiColonToken(),
+                new VariableToken("Foo"), new LeftParenToken(),
+                new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
+                new SemiColonToken(), new RightCurlyToken()));
+        parser.parseClassdef(0);
+
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException8() throws ParserException {
+        final Parser parser = new Parser(
+                Arrays.asList(new ClassToken(), new VariableToken("Foo"), new LeftCurlyToken(), new IntToken(),
+                        new IntegerToken(2), new AssignmentToken(), new IntegerToken(5), new SemiColonToken(),
+                        new VariableToken("Foo"), new LeftParenToken(),
+                        new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
+                        new SemiColonToken(), new RightCurlyToken()));
+        parser.parseClassdef(0);
+
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException9() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new IntegerToken(2),
+                new VariableToken("x"), new AssignmentToken(), new IntegerToken(5), new SemiColonToken(),
+                new VariableToken("Foo"), new LeftParenToken(),
+                new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
+                new SemiColonToken(), new RightCurlyToken()));
+        parser.parseClassdef(0);
+
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException10() throws ParserException {
+        final Parser parser = new Parser(
+                Arrays.asList(new ClassToken(), new VariableToken("Foo"), new LeftCurlyToken(), new IntegerToken(2),
+                        new VariableToken("x"), new AssignmentToken(), new IntegerToken(5), new SemiColonToken(),
+                        new VariableToken("Foo"), new LeftParenToken(),
+                        new LeftParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
+                        new SemiColonToken(), new RightCurlyToken()));
+        parser.parseClassdef(0);
+
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException11() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new IntToken(),
+                new VariableToken("x"), new AssignmentToken(), new IntegerToken(5), new SemiColonToken(),
+                new VariableToken("Foo"), new RightParenToken(),
+                new LeftParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
+                new SemiColonToken(),
+                new RightCurlyToken()));
+        parser.parseClassdef(0);
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseClassDefException12() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new IntegerToken(2),
+                new VariableToken("x"), new AssignmentToken(), new IntegerToken(5), new SemiColonToken(),
+                new VariableToken("Foo"), new LeftParenToken(),
+                new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2),
+                new SemiColonToken(), new RightCurlyToken()));
+        parser.parseClassdef(0);
+
+    }
+
+    /*
+     * class Foo extends Bar {
+     * Foo()
+     * 1 + 2;
+     * }
+     */
+    @Test
+    public void testParseProgram1() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new VariableToken("Foo"),
+                new LeftParenToken(), new RightParenToken(), new IntegerToken(1), new AdditionToken(),
+                new IntegerToken(2), new SemiColonToken(), new RightCurlyToken()));
+        final ClassName classname = new ClassName("Foo");
+        final ClassName extendsClassName = new ClassName("Bar");
+        final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
+        final List<Param> params = new ArrayList<Param>();
+        final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
+        final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
+        final ClassDef theClass = new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs);
+
+        final List<ClassDef> classdefs = new ArrayList<ClassDef>();
+        classdefs.add(theClass);
+        final List<Stmt> StmtList = new ArrayList<Stmt>();
+        final ParseResult<Program> expected = new ParseResult<Program>(new Program(classdefs, StmtList), 13);
+        assertEquals(expected, parser.parseProgram(0));
+    }
+
+    @Test
+    public void testParseProgram2() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new VariableToken("Foo"),
+                new LeftParenToken(), new RightParenToken(), new IntegerToken(1), new AdditionToken(),
+                new IntegerToken(2), new SemiColonToken(), new RightCurlyToken()));
+        final ClassName classname = new ClassName("Foo");
+        final ClassName extendsClassName = new ClassName("Bar");
+        final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
+        final List<Param> params = new ArrayList<Param>();
+        final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
+        final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
+        final ClassDef theClass = new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs);
+        final List<ClassDef> classdefs = new ArrayList<ClassDef>();
+        classdefs.add(theClass);
+        final List<Stmt> StmtList = new ArrayList<Stmt>();
+        final ParseResult<Program> expected = new ParseResult<Program>(new Program(classdefs, StmtList), 13);
+        assertEquals(expected, parser.parseProgram(0));
+    }
+
+    @Test(expected = ParserException.class)
+    public void testParseProgramException1() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new LessThanToken(), new LessThanToken(), new LessThanToken()));
+        parser.parseProgram();
+    }
+
+    /*
+     * class Foo extends Bar {
+     * Foo()
+     * 1 + 2;
+     * }
+     * println();
+     * 
+     */
+
+    @Test
+    public void testParseProgram3() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new VariableToken("Foo"),
+                new LeftParenToken(), new RightParenToken(), new IntegerToken(1), new AdditionToken(),
+                new IntegerToken(2), new SemiColonToken(), new RightCurlyToken(),
+                new PrintlnToken(), new LeftParenToken(), new RightParenToken(), new SemiColonToken()));
+        final ClassName classname = new ClassName("Foo");
+        final ClassName extendsClassName = new ClassName("Bar");
+        final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
+        final List<Param> params = new ArrayList<Param>();
+        final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
+        final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
+        final ClassDef theClass = new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs);
+        final List<Exp> exps = new ArrayList<Exp>();
+        final Stmt theStmt = new PrintlnStmt(exps);
+        final List<ClassDef> classdefs = new ArrayList<ClassDef>();
+        classdefs.add(theClass);
+        final List<Stmt> StmtList = new ArrayList<Stmt>();
+        StmtList.add(theStmt);
+        final ParseResult<Program> expected = new ParseResult<Program>(new Program(classdefs, StmtList), 17);
+        assertEquals(expected, parser.parseProgram(0));
+    }
+
+    @Test
+    public void testParseProgram4() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(), new VariableToken("Bar"), new LeftCurlyToken(), new VariableToken("Foo"),
+														new LeftParenToken(), new RightParenToken(), new IntegerToken(1), new AdditionToken(), new IntegerToken(2), new SemiColonToken(), new RightCurlyToken(),
+														new PrintlnToken(), new LeftParenToken(), new RightParenToken(), new SemiColonToken()));
+		final ClassName classname = new ClassName("Foo");
+		final ClassName extendsClassname = new ClassName("Bar");
+		final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
+		final List<Param> params = new ArrayList<Param>();
+		final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
+		final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
+		final ClassDef theClass = new ClassDef(classname, extendsClassname, vardecs, params, stmt, methoddefs);
+		final List<Exp> exps = new ArrayList<Exp>();
+		final Stmt theStmt = new PrintlnStmt(exps);
+		final List<ClassDef> classdefs = new ArrayList<ClassDef>();
+		classdefs.add(theClass);
+		final List<Stmt> StmtList = new ArrayList<Stmt>();
+		StmtList.add(theStmt);
+		final ParseResult<Program> expected = new ParseResult<Program>(new Program(classdefs, StmtList), 17);
+		assertEquals(expected.result, parser.parseProgram());
+    }
+
+    /*
+
+        * class Foo extends Bar {
+        * Foo()
+        * 1 + 2;
+        * }
+        * println("Hello");
+        * 
+
+    */
+    @Test
+    public void testParseProgram5() throws ParserException {
+        final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
+                new VariableToken("Bar"), new LeftCurlyToken(), new VariableToken("Foo"),
+                new LeftParenToken(), new RightParenToken(), new IntegerToken(1), new AdditionToken(),
+                new IntegerToken(2), new SemiColonToken(), new RightCurlyToken(),
+                new PrintlnToken(), new LeftParenToken(), new StringToken("Hello"), new RightParenToken(),
+                new SemiColonToken()));
+        final ClassName classname = new ClassName("Foo");
+        final ClassName extendsClassName = new ClassName("Bar");
+        final List<VariableDeclaration> vardecs = new ArrayList<VariableDeclaration>();
+        final List<Param> params = new ArrayList<Param>();
+        final Stmt stmt = new ExpStmt(new OpExp(new IntegerLiteralExp(1), new PlusOp(), new IntegerLiteralExp(2)));
+        final List<MethodDef> methoddefs = new ArrayList<MethodDef>();
+        final ClassDef theClass = new ClassDef(classname, extendsClassName, vardecs, params, stmt, methoddefs);
+        final List<Exp> exps = new ArrayList<Exp>();
+        exps.add(new StringLiteralExp("Hello"));
+        final Stmt theStmt = new PrintlnStmt(exps);
+        final List<ClassDef> classdefs = new ArrayList<ClassDef>();
+        classdefs.add(theClass);
+        final List<Stmt> StmtList = new ArrayList<Stmt>();
+        StmtList.add(theStmt);
+        final ParseResult<Program> expected = new ParseResult<Program>(new Program(classdefs, StmtList), 18);
+        assertEquals(expected, parser.parseProgram(0));
+    }
+
+    /*
+    Failed tests:   testParseProgram4(parser.ParserTest): expected:
+    <ParseResult(Program([ClassDef(ClassName(Foo), ClassName(Bar), [], [], [], ExpStmt(OpExp(IntegerExp(1), PlusOp, IntegerExp(2))))], [println([])]), 18)> 
+    
+    but was:
+    
+    <ParseResult(Program([ClassDef(ClassName(Foo), ClassName(Bar), [], [], [], ExpStmt(OpExp(IntegerExp(1), PlusOp, IntegerExp(2))))], [println([StringExp(Hello)])]), 18)>
+    /
+    */
+    /*
+    Failed tests:   testParseProgram4(parser.ParserTest): expected:
+    <ParseResult(Program([ClassDef(ClassName(Foo), ClassName(Bar), [], [], [], ExpStmt(OpExp(IntegerExp(1), PlusOp, IntegerExp(2))))], [println([])]), 22)> 
+    
+    but was:
+    
+    <ParseResult(Program([ClassDef(ClassName(Foo), ClassName(Bar), [], [], [], ExpStmt(OpExp(IntegerExp(1), PlusOp, IntegerExp(2))))], [println([StringExp(Hello)])]), 18)>
+    */
+   
+
+
+    /*
+     * // // foo.bar()
+     * // @Test
+     * // public void testVarMethodCall() throws ParserException {
+     * // final Parser parser = new Parser(Arrays.asList(new VariableToken("foo"),
+     * new
+     * // PeriodToken(),
+     * // new VariableToken("bar"), new LeftParenToken(), new RightParenToken()));
+     * // final Exp variable = new VariableExp(new Variable("foo"));
+     * // final Exp name = new VariableExp(new Variable("bar"));
+     * // final List<Exp> inside = new ArrayList<>();
+     * // assertEquals(new ParseResult<Exp>(new VarMethodNameCallExp(variable, name,
+     * // inside), 5),
+     * // parser.parseVarMethodNameCallExp(0));
+     * // }
+     * 
+     * // @Test
+     * // public void testVarAssignExp() throws ParserException {
+     * // final Parser parser = new Parser(Arrays.asList(new IntToken(), new
+     * // VariableToken("foo"), new AssignmentToken(),
+     * // new IntegerToken(5), new SemiColonToken()));
+     * // final Type type = new IntType();
+     * 
+     * // final Exp variable = new VariableExp(new Variable("foo"));
+     * // final Exp value = new IntegerLiteralExp(5);
+     * // assertEquals(new ParseResult<VarDec>(new VariableDeclaration(type,
+     * variable,
+     * // value), 5), parser.parseVarDec(0));
+     * 
+     * // }
+     * 
+     * /*
      * 
      * @Test
      * public void testWhileExp() throws ParserException {
