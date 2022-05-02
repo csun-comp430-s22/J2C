@@ -1,6 +1,6 @@
 package parser;
 
-public class VariableDeclaration implements VarDec {
+public class VariableDeclaration {
     public final Type type;
     public final Exp id;
     public final Exp init;

@@ -15,7 +15,7 @@ public class ThisExp implements Exp {
     }
 
     public String toString() {
-        return "ThisExp(" + value + ")";
+        return "ThisExp(" + value.toString() + ")";
     }
 
     

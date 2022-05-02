@@ -85,6 +85,8 @@ public class Tokenizer {
                 return new StrToken();
             } else if (name.equals("int")) {
                 return new IntToken();
+            } else if(name.equals("super")) {
+                return new SuperToken();
             } else {
                 return new VariableToken(name);
             }
@@ -152,6 +154,9 @@ public class Tokenizer {
         } else if (input.startsWith("=", offset)) {
             offset += 1;
             retval = new AssignmentToken();
+        } else if (input.startsWith(",", offset)) {
+            offset += 1;
+            retval = new CommaToken();
         }
         return retval;
     }

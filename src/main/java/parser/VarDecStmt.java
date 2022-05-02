@@ -1,9 +1,9 @@
 package parser;
 
 public class VarDecStmt implements Stmt {
-    public final ParseResult<VarDec> varDec;
+    public final ParseResult<VariableDeclaration> varDec;
 
-    public VarDecStmt(final ParseResult<VarDec> varDec) {
+    public VarDecStmt(final ParseResult<VariableDeclaration> varDec) {
         this.varDec = varDec;
     }
 
