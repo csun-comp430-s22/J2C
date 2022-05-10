@@ -1,14 +1,15 @@
 package lexer;
 
-public class ProtectedToken implements Token {
+public class CommaToken implements Token {
     public boolean equals(final Object other) {
-        return other instanceof ProtectedToken;
+        return other instanceof CommaToken;
     }
     public int hashCode() {
-        return 513;
+        return 591;
     }
     public String toString() {
-        return "protected";
+        return ",";
     }
     
 }
+    

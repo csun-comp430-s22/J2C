@@ -15,7 +15,7 @@ public class StringLiteralExp implements Exp {
     }
 
     public String toString() {
-        return "StringExp(" + value + ")";
+        return "StringExp(" + value.toString() + ")";
     }
 
     

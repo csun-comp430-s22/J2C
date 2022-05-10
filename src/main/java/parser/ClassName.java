@@ -13,7 +13,7 @@ public class ClassName implements Exp {
                 value.equals(((ClassName)other).value));
     }
     public String toString() {
-        return "ClassName(" + value + ")";
+        return "ClassName(" + value.toString() + ")";
     }
     
 }

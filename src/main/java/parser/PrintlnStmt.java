@@ -1,22 +1,22 @@
 package parser;
+import java.util.List;
 
 public class PrintlnStmt implements Stmt {
-    public final Exp exp;
-
-    public PrintlnStmt(final Exp exp) {
-        this.exp = exp;
-    }
-
-    public int hashCode() {
-        return exp.hashCode();
-    }
-    
-    public boolean equals(final Object other) {
-        return (other instanceof PrintlnStmt &&
-                exp.equals(((PrintlnStmt)other).exp));
+    public final List<Exp> exps;
+    public PrintlnStmt(List<Exp> exps) {
+        this.exps = exps;
     }
 
     public String toString() {
-        return "Println(" + exp.toString() + ")";
+        return "println(" + exps.toString() + ")";
     }
+    public boolean equals(Object o) {
+        if (o instanceof PrintlnStmt) {
+            PrintlnStmt other = (PrintlnStmt) o;
+            return this.exps.equals(other.exps);
+        }
+        return false;
+    }
+
+    
 }
