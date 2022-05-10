@@ -1333,6 +1333,7 @@ public class ParserTest {
      * 1 + 2;
      * }
      */
+    
     @Test
     public void testParseClassDefTest6() throws ParserException {
         final Parser parser = new Parser(Arrays.asList(new ClassToken(), new VariableToken("Foo"), new ExtendsToken(),
