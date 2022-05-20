@@ -13,7 +13,7 @@ Implement a compiler for the designed language, complete with:
 <li>A typechecker / static semantic analyzer</li>
 <li>A code generator</li>
 
-## Authors
+## Author
 <pre>
 Ibtehaz Utsay
 </pre>
