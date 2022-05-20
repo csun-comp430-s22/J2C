@@ -16,11 +16,6 @@ Implement a compiler for the designed language, complete with:
 ## Authors
 <pre>
 Ibtehaz Utsay
-Ziaur Chowdhury
-Noah Reidinger
-Ryan Nieto
-Leo Babakhanian
-Vardges Harutyunyan
 </pre>
 
 ## Documentation
@@ -75,7 +70,7 @@ classname is the name of a class
 methodname is the name of a method
 str is a string
 i is an integer
-type:: = int | bool | void | str | classname
+type:: = int | bool | str | classname
 primary_exp ::= var | str | int | true | false
 multiplicative_op ::= * | /
 multiplicative_exp ::= primary_exp(multiplicative_op primary_exp)*
@@ -112,7 +107,7 @@ Computation Abstraction Non-Trivial Feature: Class based inheritance + Methods
 
 Non-Trivial Feature #2: Subtyping
 
-Non-Trivial Feature #3: Type Casting
+Non-Trivial Feature #3: Method Overloading
 
 Work Planned for Custom Component: Access Modifiers
 
