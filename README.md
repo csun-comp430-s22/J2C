@@ -20,7 +20,10 @@ Ibtehaz Utsay
 
 ## Documentation
 
-Link to Initial Proposal: (<https://docs.google.com/document/d/1mQWRqwIdn_nY9M3pWh7nB8k_Ht-t0xxur-jjfsBvdB4/edit>)
+Link to Initial Proposal: https://docs.google.com/document/d/1mQWRqwIdn_nY9M3pWh7nB8k_Ht-t0xxur-jjfsBvdB4/edit
+
+Link to Final Documentation: https://docs.google.com/document/d/1obbLbR7vw4AfNE7bBT4wHFp_kHFFeNJ8NmIOaTUIuzI/edit
+
 
 Target Language: C
 
