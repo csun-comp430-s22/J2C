@@ -684,6 +684,175 @@ public class TypeCheckerTest {
 	}
 
 
+	@Test
+	public void testIsWellTypedStmtVarDec() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final ParseResult<VariableDeclaration> parseVarDec = new ParseResult<VariableDeclaration>(
+				new VariableDeclaration(new IntType(), new VariableExp(new Variable("Foo")),
+						new IntegerLiteralExp(0)),
+				0);
+		final VarDecStmt stmt = new VarDecStmt(parseVarDec);
+		final Map<Variable, Type> typeEnvironment = new HashMap<Variable, Type>();
+		final Type returnType = new StringType();
+		final Map<Variable, Type> expected = new HashMap<Variable, Type>();
+		expected.put(new Variable("Foo"), new IntType());
+		final Map<Variable, Type> received = typechecker.isWellTypedStmt(stmt, typeEnvironment,
+				new ClassName("Bar"), returnType);
+		assertEquals(received, expected);
+	}
+
+	@Test
+	public void testIsWellTypedStmtVarAssign() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final Map<Variable, Type> typeEnvironment = new HashMap<Variable, Type>();
+		final Type returnType = new StringType();
+		final VarAssignStmt valChange = new VarAssignStmt(new VariableExp(new Variable("Foo")),
+				new IntegerLiteralExp(0));
+		typeEnvironment.put(new Variable("Foo"), new IntType());
+		final Map<Variable, Type> received = typechecker.isWellTypedStmt(valChange, typeEnvironment,
+				new ClassName("Bar"), returnType);
+		assertEquals(received, typeEnvironment);
+	}
+
+	@Test
+	public void testIsWellTypedStmtWhile() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final Map<Variable, Type> typeEnvironment = new HashMap<Variable, Type>();
+		typeEnvironment.put(new Variable("Foo"), new IntType());
+		final ClassName classname = new ClassName("HelloWorld");
+		final Type funcReturnType = new BoolType();
+		final Map<Variable, Type> expected = typeEnvironment;
+		final Map<Variable, Type> received = typechecker.isWellTypedStmt(
+				new WhileStmt(new TrueExp(), new ExpStmt(new IntegerLiteralExp(0))), typeEnvironment, classname,
+				funcReturnType);
+		assertEquals(expected, received);
+	}
+
+	@Test
+	public void isWellTypedStmtIf() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final Map<Variable, Type> typeEnvironment = new HashMap<Variable, Type>();
+		typeEnvironment.put(new Variable("Foo"), new IntType());
+		final ClassName classname = new ClassName("TestClass");
+		final Type funcReturnType = new BoolType();
+		final Map<Variable, Type> expected = typeEnvironment;
+		final Map<Variable, Type> received = typechecker.isWellTypedStmt(
+				new IfStmt(new FalseExp(), new ExpStmt(new IntegerLiteralExp(0)), new ExpStmt(new IntegerLiteralExp(0))),
+				typeEnvironment, classname, funcReturnType);
+		assertEquals(expected, received);
+	}
+
+	@Test
+	public void isWellTypedStmtReturn() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final Map<Variable, Type> typeEnvironment = new HashMap<Variable, Type>();
+		final ClassName classname = new ClassName("TestClass");
+		final Map<Variable, Type> expected = typeEnvironment;
+		final Map<Variable, Type> received = typechecker.isWellTypedStmt(new ReturnStmt(new TrueExp()),
+				typeEnvironment, classname, new BoolType());
+		assertEquals(expected, received);
+	}
+
+	@Test
+	public void isWellTypedStmtBlock() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final Map<Variable, Type> typeEnvironment = new HashMap<Variable, Type>();
+		typeEnvironment.put(new Variable("Foo"), new IntType());
+		final ClassName classname = new ClassName("TestClass");
+		final Type funcReturnType = new BoolType();
+		final Map<Variable, Type> expected = typeEnvironment;
+		final List<Stmt> stmts = new ArrayList<Stmt>();
+		stmts.add(new ExpStmt(new IntegerLiteralExp(0)));
+		final Map<Variable, Type> received = typechecker.isWellTypedStmt(new BlockStmt(stmts), typeEnvironment,
+				classname, funcReturnType);
+		assertEquals(expected, received);
+	}
+
+	@Test
+	public void isWellTypedStmtPrint() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final Map<Variable, Type> typeEnvironment = new HashMap<Variable, Type>();
+		final ClassName classname = new ClassName("TestClass");
+		final Map<Variable, Type> expected = typeEnvironment;
+		final List<Exp> printExps = new ArrayList<Exp>();
+		printExps.add(new IntegerLiteralExp(1));
+		final Type returnType = new StringType();
+		final Map<Variable, Type> received = typechecker.isWellTypedStmt(new PrintlnStmt(printExps), typeEnvironment,
+				classname, returnType);
+		assertEquals(expected, received);
+	}
+
+	
+	@Test
+	public void isWellTypedStmtThis() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final Map<Variable, Type> typeEnvironment = new HashMap<Variable, Type>();
+		typeEnvironment.put(new Variable("Foo"), new IntType());
+		final ClassName classname = new ClassName("Bar");
+		final Map<Variable, Type> expected = typeEnvironment;
+		final Map<Variable, Type> received = typechecker.isWellTypedStmt(
+				new ThisStmt(new VariableExp(new Variable("Foo")), new VariableExp(new Variable("Foo"))), typeEnvironment,
+				classname, null);
+		assertEquals(expected, received);
+	}
+
+
+	@Test
+	public void testAddToMap() throws TypeErrorException {
+		final TypeChecker typechecker = new TypeChecker(
+				new Program(new ArrayList<ClassDef>(), new ArrayList<Stmt>()));
+		final Map<Variable, Type> originalTypeEnvironment = new HashMap<Variable, Type>();
+		originalTypeEnvironment.put(new Variable("foo"), new IntType());
+		final Map<Variable, Type> received = TypeChecker.addToMap(originalTypeEnvironment, new Variable("bar"),
+				new StringType());
+		originalTypeEnvironment.put(new Variable("bar"), new StringType());
+		final Map<Variable, Type> expected = originalTypeEnvironment;
+		assertEquals(expected, received);
+	}
+
+	@Test
+	public void testIsWellTypedProgram() throws TypeErrorException {
+		final ClassName classname = new ClassName("Foo");
+		final List<Param> params = new ArrayList<Param>();
+		params.add(new Param(new IntType(), new VariableExp(new Variable("bar"))));
+		final List<MethodDef> methodDefs = new ArrayList<MethodDef>();
+		final MethodDef methodDef = new MethodDef(new StringType(), new MethodName("run"),
+				new ArrayList<Param>(), new ExpStmt(new IntegerLiteralExp(0)));
+		methodDefs.add(methodDef);
+		final ClassDef classDef = new ClassDef(classname, new ClassName("Object"),
+				new ArrayList<VariableDeclaration>(), params, new ExpStmt(new IntegerLiteralExp(0)), methodDefs);
+		List<ClassDef> classDefs = new ArrayList<ClassDef>();
+		classDefs.add(classDef);
+		final Stmt stmt = new ExpStmt(new IntegerLiteralExp(0));
+		final List<Stmt> stmts = new ArrayList<Stmt>();
+		stmts.add(stmt);
+		final TypeChecker typechecker = new TypeChecker(new Program(classDefs, stmts));
+		typechecker.isWellTypedProgram();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
